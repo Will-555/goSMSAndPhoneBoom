@@ -1,1 +1,1 @@
-docker logs --tail 30 sms
+docker logs --tail 30 smsboom1225

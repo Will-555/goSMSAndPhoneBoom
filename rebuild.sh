@@ -1,3 +1,3 @@
 ./end.sh
-docker rmi sms
-docker build -t sms .
+docker rmi smsboom:v0.1
+docker build -t smsboom:v0.1 .

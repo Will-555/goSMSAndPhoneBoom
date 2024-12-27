@@ -1,22 +1,18 @@
 # 使用 alpine 镜像作为基础镜像
-FROM alpine AS prod
+FROM golang:1.20-alpine AS build
 
+WORKDIR /SmsBoom
 # 拷贝执行文件
-COPY main /main
-# 拷贝配置文件
-COPY ./config.yml ./config.yml
-COPY ./json/ ./json/
-COPY log.txt ./log.txt
+COPY . /SmsBoom/
 
-# 添加执行权限
-RUN chmod +x /main
-RUN chmod 777 /log.txt
+RUN echo "Contents of /:" && ls -l /SmsBoom
 
-RUN echo -e 'https://mirrors.aliyun.com/alpine/v3.6/main/\nhttps://mirrors.aliyun.com/alpine/v3.6/community/' > /etc/apk/repositories \
-    && apk update \
-    && apk add tzdata \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone
+# 下载依赖并编译源码
+RUN cd /SmsBoom \
+    go mod tidy && \
+    go build -o main /SmsBoom/
+
+RUN chmod +x ./*
 
 # 定义容器启动时执行的命令
-CMD ["./main"]
+CMD ["/SmsBoom/main"]

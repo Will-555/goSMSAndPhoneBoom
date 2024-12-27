@@ -1,1 +1,1 @@
-docker rm -f sms
+docker rm -f smsboom:v0.1

@@ -19,7 +19,7 @@ func InitLogStyle() {
 		format = strings.Replace(format, ":", "-", -1)
 		fileName = format + ".txt"
 	} else {
-		fileName = "log.txt"
+		fileName = "/logs/log.txt"
 	}
 	fmt.Println("日志地址:" + fileName)
 

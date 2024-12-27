@@ -1,1 +1,2 @@
-docker run --name sms -v /root/sms/config.yml:/config.yml -v /root/sms/log.txt:/log.txt -d sms
+#docker run --name sms -v /root/sms/config.yml:/config.yml -v /root/sms/log.txt:/log.txt -d sms
+docker run --name smsboom1225 -v ./config.yml:/SmsBoom/config.yml -v ./logs:/SmsBoom/logs -d smsboom:v0.1

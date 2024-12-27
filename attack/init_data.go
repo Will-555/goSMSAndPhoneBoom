@@ -2,6 +2,7 @@ package attack
 
 import (
 	"encoding/json"
+	"fmt"
 	"goSMSBoom/config"
 	"goSMSBoom/log"
 	"goSMSBoom/model"
@@ -13,7 +14,7 @@ import (
 func Ready() ([]*model.SMSBoom, error) {
 
 	// 获取phones.json数据
-	arr, err := utils.GetFileByteArr("./json/phoneApi.json")
+	arr, err := utils.GetFileByteArr(GetApiFile("phoneApi.json"))
 	if err != nil {
 		log.Println("获取phones.json失败", err)
 		return nil, err
@@ -34,14 +35,14 @@ func Ready() ([]*model.SMSBoom, error) {
 	}
 
 	// 获取api.json数据
-	httpInfo, err := utils.GetFileByteArr("./json/api.json")
+	httpInfo, err := utils.GetFileByteArr(GetApiFile("api.json"))
 	if err != nil {
 		log.Println("解析api.json失败", err)
 		return nil, err
 	}
 
 	// 获取getApi.json数据
-	getApi, err := utils.GetFileByteArr("./json/GETAPI.json")
+	getApi, err := utils.GetFileByteArr(GetApiFile(("GETAPI.json")))
 	if err != nil {
 		log.Println("GETAPI.json", err)
 		return nil, err
@@ -69,4 +70,9 @@ func Ready() ([]*model.SMSBoom, error) {
 	}
 
 	return sms, nil
+}
+
+func GetApiFile(name string) string {
+	fileDir := "json"
+	return fmt.Sprintf("./%v/%v", fileDir, name)
 }

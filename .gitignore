@@ -21,3 +21,5 @@ build/
 
 # 忽略 JetBrains IDE 生成的 .idea 目录
 .idea/
+
+info/
