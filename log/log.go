@@ -12,6 +12,7 @@ import (
 // InitLogStyle 初始化日志格式
 func InitLogStyle() {
 	var fileName string
+	logDir := "logs/" // 使用相对路径
 	if config.Configs.ENV == "win" {
 		// 获取当前时间并格式化为文件名
 		format := time.Now().Format("2006-01-02 15:04:05")
@@ -19,8 +20,9 @@ func InitLogStyle() {
 		format = strings.Replace(format, ":", "-", -1)
 		fileName = format + ".txt"
 	} else {
-		fileName = "/logs/log.txt"
+		fileName = "log.txt"
 	}
+	fileName = logDir + fileName
 	fmt.Println("日志地址:" + fileName)
 
 	// 打开日志文件，如果文件不存在则创建
