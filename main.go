@@ -12,11 +12,11 @@ import (
 )
 
 func init() {
-	log.InitLogStyle()
 	err := config.LoadConfig()
 	if err != nil {
 		log.Println("配置文件加载失败")
 	}
+	log.InitLogStyle()
 	marshal, err := json.Marshal(config.Configs)
 	log.Println("配置文件是", string(marshal))
 }
